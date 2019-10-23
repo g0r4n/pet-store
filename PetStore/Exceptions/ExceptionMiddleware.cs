@@ -18,7 +18,7 @@ namespace PetStore.Exceptions
 		{
 			if (exception is ElementNotFoundException)
 				return new Error() { StatusCode = HttpStatusCode.NotFound, Message = exception.Message };
-			else return new Error() { StatusCode = HttpStatusCode.InternalServerError, Message = "Application is on maintainance. Please contact our support team." };
+			else return new Error() { StatusCode = HttpStatusCode.InternalServerError, Message = exception.Message };
 		}
 	}
 }
