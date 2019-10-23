@@ -1,0 +1,30 @@
+﻿@model PetStore.Models.DomainModels.Product
+@{
+	ViewData["Title"] = "Details";
+}
+
+<h1>Product details</h1>
+<div class="modal-body">
+	<form asp-action="UpdateProduct" asp-controller="Management">
+		<div class="form-group">
+			@Html.TextBox("Id", Model.Id, new { @class = "form-control", type = "hidden" })
+		</div>
+		<div class="form-group">
+			@Html.Label("Name")
+			@Html.TextBox("Name", Model.Name, new { @class = "form-control" })
+		</div>
+		<div class="form-group">
+			@Html.Label("Description")
+			@Html.TextArea("Description", Model.Description, new { @class = "form-control" })
+		</div>
+		@{
+			if (User.Identity.IsAuthenticated)
+			{
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary">Save</button>
+				</div>
+			}
+		}
+
+	</form>
+</div>

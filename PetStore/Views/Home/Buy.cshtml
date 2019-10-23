@@ -1,0 +1,51 @@
+﻿@model PetStore.Models.ViewModels.InputViewModels.OrderInputViewModel
+
+@{
+	ViewData["Title"] = "User Information";
+}
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://unpkg.com/fuse.js@2.5.0/src/fuse.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.1/lodash.min.js"></script>
+<script src="https://screenfeedcontent.blob.core.windows.net/html/airports.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="container mainContainer">
+	<form asp-action="Buy">
+		@Html.TextBox("ProductId", ViewBag.ProductId, null, new { type = "hidden"})
+		<div class="form-group input-group">
+			<span class="input-group-addon icon-input-class icon-input"><i class="fa fa-user" aria-hidden="true"></i></span>
+			@Html.TextBoxFor(m => m.FirstName, new { @class = "form-control input-with-icon", placeholder = "First Name" })
+			@Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+		</div>
+		<div class="form-group input-group">
+			<span class="input-group-addon icon-input-class icon-input"><i class="fa fa-user" aria-hidden="true"></i></span>
+			@Html.TextBoxFor(m => m.LastName, new { @class = "form-control input-with-icon", placeholder = "First Name" })
+			@Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+		</div>
+		<div class="form-group input-group">
+			<span class="input-group-addon icon-input-class icon-input"><i class="fa fa-user" aria-hidden="true"></i></span>
+			@Html.TextBoxFor(m => m.Email, new { @class = "form-control input-with-icon", placeholder = "Email" })
+			@Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+		</div>
+		<div class="form-group input-group">
+			<span class="input-group-addon icon-input-class icon-input"><i class="fa fa-user" aria-hidden="true"></i></span>
+			@Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control input-with-icon", placeholder = "Phone Number" })
+			@Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+		</div>
+
+		<div class="form-group input-group">
+			<span class="input-group-addon icon-input-class icon-input"><i class="fa fa-user" aria-hidden="true"></i></span>
+			@Html.TextBoxFor(m => m.CreditCardNumber, new { @class = "form-control input-with-icon", placeholder = "Credit Card Number" })
+			@Html.ValidationMessageFor(m => m.CreditCardNumber, "", new { @class = "text-danger" })
+		</div>
+		
+		<div class="form-group input-group less-btn">
+			<input type="Submit" value="Order" class="btn btn-info cst-btn" id="srch">
+		</div>
+
+	</form>
+</div>
