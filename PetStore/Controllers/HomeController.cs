@@ -1,29 +1,53 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using PetStore.Models;
+using PetStore.Models.DomainModels;
+using PetStore.Models.ViewModels.InputViewModels;
+using PetStore.Services.Interfaces;
+using X.PagedList;
 
 namespace PetStore.Controllers
 {
 	public class HomeController : Controller
 	{
-		public IActionResult Index()
+		/// <summary>
+		/// Reference to a service that contains all operations that regular user can invoke.
+		/// </summary>
+		public IUserService UserService { get; private set; }
+
+		public HomeController(IUserService userService) => UserService = userService;
+
+		/// <summary>
+		/// Shows page where paged list of products is shown.
+		/// </summary>
+		public async Task<IActionResult> Index(int pageIndex = 1)
 		{
+			IPagedList<Product> listOfProducts = await UserService.GetProductsAsync(pageIndex, 5);
+			return View(listOfProducts);
+		}
+
+		/// <summary>
+		/// Shows page where form for customer's information is shown.
+		/// </summary>
+		/// <param name="id">Id of a product that's been requested.</param>
+		/// <returns></returns>
+		public IActionResult Buy(int id)
+		{
+			ViewBag.ProductId = id;
 			return View();
 		}
 
-		public IActionResult Privacy()
+		/// <summary>
+		/// Endpoint that saves customer's order to database.
+		/// </summary>
+		/// <param name="input">Customer's info provided on registration form.</param>
+		/// <returns></returns>
+		[HttpPost]
+		public async Task<IActionResult> Buy(OrderInputViewModel input)
 		{
-			return View();
+			if (!ModelState.IsValid) return View("Buy", input);
+			await UserService.BuyProductAsync(input);
+			return View("Confirmation");
 		}
 
-		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-		public IActionResult Error()
-		{
-			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-		}
 	}
 }
