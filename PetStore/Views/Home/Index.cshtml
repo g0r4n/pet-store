@@ -16,7 +16,7 @@
 			{
 				<tr>
 					<td>@product.Name</td>
-					<td>@Html.ActionLink("Details", "ProductDetails", "Management", new { id = product.Id }) | @Html.ActionLink("Buy", "Buy", "Home", new { id = product.Id })</td>
+					<td>@Html.ActionLink("Details", "Details", "Home", new { id = product.Id }) | @Html.ActionLink("Buy", "Buy", "Home", new { id = product.Id })</td>
 				</tr>
 			}
 		}

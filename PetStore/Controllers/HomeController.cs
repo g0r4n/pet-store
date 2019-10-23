@@ -37,6 +37,15 @@ namespace PetStore.Controllers
 		}
 
 		/// <summary>
+		/// Shows page where product details are shown.
+		/// </summary>
+		public async Task<IActionResult> Details(int id)
+		{
+			Product product = await UserService.GetProductAsync(id);
+			return View("ProductDetails", product);
+		}
+
+		/// <summary>
 		/// Endpoint that saves customer's order to database.
 		/// </summary>
 		/// <param name="input">Customer's info provided on registration form.</param>
